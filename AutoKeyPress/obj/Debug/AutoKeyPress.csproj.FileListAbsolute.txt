@@ -1,0 +1,8 @@
+D:\Programming\Projects\AutoKeyPress\AutoKeyPress\bin\Debug\AutoKeyPress.exe.config
+D:\Programming\Projects\AutoKeyPress\AutoKeyPress\bin\Debug\AutoKeyPress.exe
+D:\Programming\Projects\AutoKeyPress\AutoKeyPress\bin\Debug\AutoKeyPress.pdb
+D:\Programming\Projects\AutoKeyPress\AutoKeyPress\obj\Debug\AutoKeyPress.csprojResolveAssemblyReference.cache
+D:\Programming\Projects\AutoKeyPress\AutoKeyPress\obj\Debug\AutoKeyPress.Properties.Resources.resources
+D:\Programming\Projects\AutoKeyPress\AutoKeyPress\obj\Debug\AutoKeyPress.csproj.GenerateResource.Cache
+D:\Programming\Projects\AutoKeyPress\AutoKeyPress\obj\Debug\AutoKeyPress.exe
+D:\Programming\Projects\AutoKeyPress\AutoKeyPress\obj\Debug\AutoKeyPress.pdb
