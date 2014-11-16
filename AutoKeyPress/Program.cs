@@ -13,7 +13,10 @@ namespace AutoKeyPress {
   static class Program {
 
     public static Key oosHotkey = Key.OemTilde;
+    public static Key itemlevelHotkey = Key.F2;
+    public static Key remainingHotkey = Key.F3;
     public static Key logoutHotkey = Key.F5;
+    public static Key logoutAndLoginHotkey = Key.F6;
 
     [STAThread]
     static void Main() {
@@ -24,16 +27,52 @@ namespace AutoKeyPress {
       while (pointer != null) {
         if (Keyboard.IsKeyDown(oosHotkey)) {
           Console.WriteLine(oosHotkey);
+
           SetForegroundWindow(pointer);
+
           SendKeys.SendWait("\n/oos\n");
+        }
+        if (Keyboard.IsKeyDown(itemlevelHotkey)) {
+          Console.WriteLine(itemlevelHotkey);
+
+          SetForegroundWindow(pointer);
+
+          Point currentMousePoint;
+          GetCursorPos(out currentMousePoint);
+          LeftClick(currentMousePoint.X, currentMousePoint.Y);
+          Thread.Sleep(50);
+          SendKeys.SendWait("\n/itemlevel\n");
+          Thread.Sleep(50);
+          LeftClick(currentMousePoint.X, currentMousePoint.Y);
+        }
+        if (Keyboard.IsKeyDown(remainingHotkey)) {
+          Console.WriteLine(remainingHotkey);
+
+          SetForegroundWindow(pointer);
+
+          SendKeys.SendWait("\n/remaining\n");
         }
         if (Keyboard.IsKeyDown(logoutHotkey)) {
           Console.WriteLine(logoutHotkey);
+
+          SetForegroundWindow(pointer);
+
           SendKeys.SendWait("{ESC}");
           Thread.Sleep(10);
           LeftClick(800, 350);
         }
-        Thread.Sleep(100);
+        if (Keyboard.IsKeyDown(logoutAndLoginHotkey)) {
+          Console.WriteLine(logoutAndLoginHotkey);
+
+          SetForegroundWindow(pointer);
+
+          SendKeys.SendWait("{ESC}");
+          Thread.Sleep(10);
+          LeftClick(800, 350);
+          Thread.Sleep(300);
+          SendKeys.SendWait("\n");
+        }
+        Thread.Sleep(50);
       }
       //sendKeystroke("[No Name] - GVIM", Keys.N, 0);
       //Application.Run(new Form1());
