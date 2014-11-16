@@ -11,22 +11,27 @@ using System.Diagnostics;
 
 namespace AutoKeyPress {
   static class Program {
-    /// <summary>
-    /// The main entry point for the application.
-    /// </summary>
+
+    public static Key oosHotkey = Key.OemTilde;
+    public static Key logoutHotkey = Key.F5;
+
     [STAThread]
     static void Main() {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
-
-      Process p = Process.GetProcessesByName("PathOfExile").FirstOrDefault();
-      IntPtr pointer = p.MainWindowHandle;
-      Key hotkey = Key.OemTilde;
+      Process process = Process.GetProcessesByName("PathOfExile").FirstOrDefault();
+      IntPtr pointer = process.MainWindowHandle;
       while (pointer != null) {
-        if (Keyboard.IsKeyDown(hotkey)) {
-          Console.WriteLine(hotkey);
+        if (Keyboard.IsKeyDown(oosHotkey)) {
+          Console.WriteLine(oosHotkey);
           SetForegroundWindow(pointer);
           SendKeys.SendWait("\n/oos\n");
+        }
+        if (Keyboard.IsKeyDown(logoutHotkey)) {
+          Console.WriteLine(logoutHotkey);
+          SendKeys.SendWait("{ESC}");
+          Thread.Sleep(10);
+          LeftClick(800, 350);
         }
         Thread.Sleep(100);
       }
@@ -68,7 +73,7 @@ namespace AutoKeyPress {
       SetCursorPos(x, y);
       mouse_event((int)(MouseEventFlags.LEFTDOWN), 0, 0, 0, 0);
       mouse_event((int)(MouseEventFlags.LEFTUP), 0, 0, 0, 0);
-      SetCursorPos(currentMousePoint.X, currentMousePoint.Y);
+      //SetCursorPos(currentMousePoint.X, currentMousePoint.Y);
     }
 
     public static void RightClick(int x, int y) {
