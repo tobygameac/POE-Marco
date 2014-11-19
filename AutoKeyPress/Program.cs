@@ -13,8 +13,9 @@ namespace AutoKeyPress {
   static class Program {
 
     public static Key oosHotkey = Key.OemTilde;
-    public static Key itemlevelHotkey = Key.F2;
+    public static Key ladderHotkey = Key.F2;
     public static Key remainingHotkey = Key.F3;
+    public static Key itemlevelHotkey = Key.F4;
     public static Key logoutHotkey = Key.F5;
     public static Key logoutAndLoginHotkey = Key.F6;
 
@@ -23,19 +24,40 @@ namespace AutoKeyPress {
       Application.EnableVisualStyles();
       Application.SetCompatibleTextRenderingDefault(false);
       Process process = Process.GetProcessesByName("PathOfExile").FirstOrDefault();
-      IntPtr pointer = process.MainWindowHandle;
-      while (pointer != null) {
+      bool processGone = false;
+      while (true) {
+        if (process == null) {
+          if (!processGone) {
+            processGone = true;
+            Console.WriteLine("PathOfExile.exe not found!");
+          }
+          process = Process.GetProcessesByName("PathOfExile").FirstOrDefault();
+          continue;
+        }
+        if (processGone) {
+          processGone = false;
+          Console.WriteLine("PathOfExile.exe found!");
+        }
+        IntPtr pointer = process.MainWindowHandle;
+
         if (Keyboard.IsKeyDown(oosHotkey)) {
           Console.WriteLine(oosHotkey);
 
-          SetForegroundWindow(pointer);
+          //SetForegroundWindow(pointer);
 
           SendKeys.SendWait("\n/oos\n");
+        }
+        if (Keyboard.IsKeyDown(ladderHotkey)) {
+          Console.WriteLine(ladderHotkey);
+
+          //SetForegroundWindow(pointer);
+
+          SendKeys.SendWait("\n/ladder\n");
         }
         if (Keyboard.IsKeyDown(itemlevelHotkey)) {
           Console.WriteLine(itemlevelHotkey);
 
-          SetForegroundWindow(pointer);
+          //SetForegroundWindow(pointer);
 
           Point currentMousePoint;
           GetCursorPos(out currentMousePoint);
@@ -48,23 +70,23 @@ namespace AutoKeyPress {
         if (Keyboard.IsKeyDown(remainingHotkey)) {
           Console.WriteLine(remainingHotkey);
 
-          SetForegroundWindow(pointer);
+          //SetForegroundWindow(pointer);
 
           SendKeys.SendWait("\n/remaining\n");
         }
         if (Keyboard.IsKeyDown(logoutHotkey)) {
           Console.WriteLine(logoutHotkey);
 
-          SetForegroundWindow(pointer);
+          //SetForegroundWindow(pointer);
 
           SendKeys.SendWait("{ESC}");
-          Thread.Sleep(10);
+          Thread.Sleep(100);
           LeftClick(800, 350);
         }
         if (Keyboard.IsKeyDown(logoutAndLoginHotkey)) {
           Console.WriteLine(logoutAndLoginHotkey);
 
-          SetForegroundWindow(pointer);
+          //SetForegroundWindow(pointer);
 
           SendKeys.SendWait("{ESC}");
           Thread.Sleep(10);
